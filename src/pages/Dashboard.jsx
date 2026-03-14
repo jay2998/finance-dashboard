@@ -8,8 +8,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useApi } from '@/lib/useApi'
 import { fetchTransactions } from '@/lib/api'
 
-const iconList = [Wallet, TrendingUp, TrendingDown, BadgePoundSterling]
-
 export default function Dashboard() {
   const { data: transactions, loading, error } = useApi(fetchTransactions)
 
@@ -35,14 +33,14 @@ export default function Dashboard() {
   if (error) return <p className="text-red-500">Error: {error}</p>
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
+    <div className="space-y-4 md:space-y-6">
+      <h1 className="text-xl md:text-2xl font-bold text-slate-900">Dashboard</h1>
 
-      {/* Stat cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+      {/* Stat cards - 2 cols on mobile, 4 on desktop */}
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 md:gap-4">
         {loading
           ? Array(4).fill(0).map((_, i) => (
-              <Skeleton key={i} className="h-32 rounded-xl" />
+              <Skeleton key={i} className="h-28 md:h-32 rounded-xl" />
             ))
           : stats.map((stat) => (
               <StatCard
@@ -57,7 +55,7 @@ export default function Dashboard() {
         }
       </div>
 
-      {/* Charts */}
+      {/* Charts - stack on mobile */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <SpendingChart transactions={transactions} loading={loading} />
         <CategoryChart transactions={transactions} loading={loading} />
@@ -72,19 +70,19 @@ export default function Dashboard() {
           {loading ? (
             <div className="space-y-3">
               {Array(5).fill(0).map((_, i) => (
-                <Skeleton key={i} className="h-10 rounded-lg  dark:text-white" />
+                <Skeleton key={i} className="h-10 rounded-lg" />
               ))}
             </div>
           ) : (
             <div className="space-y-3">
               {recent.map((t) => (
                 <div key={t.id} className="flex items-center justify-between py-2 border-b border-slate-100 dark:border-slate-700 last:border-0">
-                  <div>
-                    <p className="text-sm font-medium text-slate-900 dark:text-white">{t.description}</p>
+                  <div className="min-w-0 flex-1 mr-2">
+                    <p className="text-sm font-medium text-slate-900 dark:text-white truncate">{t.description}</p>
                     <p className="text-xs text-slate-400 dark:text-slate-500">{t.date}</p>
                   </div>
-                  <div className="flex items-center gap-2  dark:text-white">
-                    <Badge variant="secondary" className="text-xs">{t.category}</Badge>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <Badge variant="secondary" className="text-xs hidden sm:inline-flex">{t.category}</Badge>
                     <span className={`text-sm font-semibold ${Number(t.amount) > 0 ? 'text-green-600' : 'text-red-500'}`}>
                       {Number(t.amount) > 0 ? '+' : '-'}PKR {Math.abs(Number(t.amount)).toLocaleString()}
                     </span>
