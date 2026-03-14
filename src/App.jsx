@@ -1,3 +1,19 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout'
+import Dashboard from './pages/Dashboard'
+import Transactions from './pages/Transactions'
+import Budgets from './pages/Budgets'
+
 export default function App() {
-  return <h1 className="text-3xl font-bold text-blue-500">Tailwind works!</h1>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="transactions" element={<Transactions />} />
+          <Route path="budgets" element={<Budgets />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
