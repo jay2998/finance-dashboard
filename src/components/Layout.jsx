@@ -84,7 +84,7 @@ export default function Layout() {
           <div className="flex items-center justify-between px-4">
             <h1 style={{ color: dark ? 'white' : '#0f172a' }} className="text-xl font-bold flex items-center gap-2">
               <img src="/rupee.ico" alt="rupee" className="w-6 h-6" />
-              FinanceApp
+              SpendWise PK
             </h1>
             <Button
               variant="ghost"
@@ -127,7 +127,7 @@ export default function Layout() {
           </Button>
           <h1 style={{ color: dark ? 'white' : '#0f172a' }} className="text-lg font-bold flex items-center gap-2">
             <img src="/rupee.ico" alt="rupee" className="w-5 h-5" />
-            FinanceApp
+            SpendWise PK
           </h1>
           <Button variant="ghost" size="icon" onClick={toggleDark}>
             {dark ? <Sun size={18} style={{ color: 'white' }} /> : <Moon size={18} />}
